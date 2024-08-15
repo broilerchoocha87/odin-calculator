@@ -24,8 +24,17 @@ body {
 }
 
 .display {
-  flex: 1 1 auto;
+  flex: 1 1 30px;
+  display: flex;
   background-color: lightyellow; 
+  align-items: end;
+  justify-content: right;
+  font-size: 20px;
+}
+
+#displayText {
+  margin: 0px;
+  padding: 0px;
 }
 
 .second-container {

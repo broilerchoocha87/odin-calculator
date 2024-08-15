@@ -68,6 +68,10 @@ body {
   background-color: lightgrey;
 }
 
+.oprBtns.equal {
+  background-color: lightsalmon;
+}
+
 .nums {
   display: flex;
   flex: 4 1 auto;

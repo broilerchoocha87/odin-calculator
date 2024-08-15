@@ -11,7 +11,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  return (+a / +b).toFixed(2);
+  if (+b === 0) return "ERROR";
+  if (a % b !== 0) return (+a / +b).toFixed(2);
+  else return +a / +b;
 }
 
 let operandA = "";
@@ -42,11 +44,10 @@ const numberBtns = document.querySelectorAll(".numBtn");
 
 numberBtns.forEach((numBtn) => {
   numBtn.addEventListener("click", (event) => {
-    if (!(operator)) {
+    if (!operator) {
       operandA += event.target.textContent;
       display.textContent = operandA;
-    }
-    else {
+    } else {
       display.textContent = "";
       operandB += event.target.textContent;
       display.textContent = operandB;
@@ -65,8 +66,7 @@ clearBtn.addEventListener("click", (event) => {
 const oprBtns = document.querySelectorAll(".oprBtns.opr");
 oprBtns.forEach((operation) => {
   operation.addEventListener("click", (event) => {
-    if (!(operator))
-      operator = event.target.textContent;
+    if (!operator) operator = event.target.textContent;
     else {
       let result = operate(operator, operandA, operandB);
       display.textContent = result;
@@ -75,10 +75,43 @@ oprBtns.forEach((operation) => {
       operandB = "";
     }
   });
-})
+});
 
 const eqlBtn = document.querySelector(".oprBtns.equal");
 eqlBtn.addEventListener("click", (event) => {
   const result = operate(operator, operandA, operandB);
   display.textContent = result;
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key >= 0 && event.key <= 9) {
+    if (!operator) {
+      operandA += event.key;
+      display.textContent = operandA;
+    } else {
+      display.textContent = "";
+      operandB += event.key;
+      display.textContent = operandB;
+    }
+  }
+  if (event.key === "Enter") {
+    const result = operate(operator, operandA, operandB);
+    display.textContent = result;
+  }
+  if (event.key === "Backspace") {
+    operandA = "";
+    operandB = "";
+    operator = "";
+    display.textContent = "";
+  }
+  if (event.key === "+" || event.key === "-") {
+    if (!operator) operator = event.key;
+    else {
+      let result = operate(operator, operandA, operandB);
+      display.textContent = result;
+      operandA = result;
+      operator = event.key;
+      operandB = "";
+    }
+  }
 });

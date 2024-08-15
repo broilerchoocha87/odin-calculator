@@ -1,0 +1,1 @@
+This is my Project submission for the Final Project of The Odin Project's foundation course.
